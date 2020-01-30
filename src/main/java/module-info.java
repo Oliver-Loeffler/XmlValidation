@@ -1,4 +1,4 @@
-module com.example.test {
+module net.raumzeitfalle.xml {
     requires java.logging;
     requires java.xml;
 }
