@@ -68,9 +68,9 @@ public class XmlValidator {
 
 	private DOMSource createDOMSource(File xmlFile) throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();	
+		DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
 		documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-		DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
 		Document document = builder.parse(new InputSource(xmlFile.getAbsolutePath()));
 		DOMSource domSource = new DOMSource(document);
 		return domSource;
