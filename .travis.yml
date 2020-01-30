@@ -1,0 +1,17 @@
+language: java
+
+sudo: false
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      jdk: oraclejdk11
+
+install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --no-transfer-progress -Dgpg.skip -Dlicense.skipDownloadLicenses -Dlicense.skipUpdateLicense
+
+script: ./mvnw install -Dgpg.skip -Dlicense.skipDownloadLicenses -Dlicense.skipUpdateLicense --no-transfer-progress
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - ./mvnw sonar:sonar -DsourceEncoding=UTF-8
