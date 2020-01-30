@@ -17,10 +17,10 @@ import org.xml.sax.SAXException;
 
 public class XmlValidator {
 
-	private final File schema;
+	private final File schemaFile;
 
 	public XmlValidator(File xsdFile) {
-		this.schema = xsdFile;
+		this.schemaFile = xsdFile;
 	}
 
 	public void validate(File xmlFile) throws Exception {
@@ -38,8 +38,8 @@ public class XmlValidator {
 		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 		
 		// load a WXS schema, represented by a Schema instance
-		Source schemaFile = new StreamSource(schema);
-		Schema schema = factory.newSchema(schemaFile);
+		Source schemaSource = new StreamSource(this.schemaFile);
+		Schema schema = factory.newSchema(schemaSource);
 
 		// create a Validator instance, which can be used to validate an instance
 		// document
