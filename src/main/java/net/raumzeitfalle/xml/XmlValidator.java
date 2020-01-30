@@ -25,15 +25,18 @@ public class XmlValidator {
 
 	public void validate(File xmlFile) throws Exception {
 
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		documentBuilderFactory.setAttribute(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();	
+		documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+		
 		DocumentBuilder parser = documentBuilderFactory.newDocumentBuilder();
 		Document document = parser.parse(xmlFile);
 
 		// create a SchemaFactory capable of understanding WXS schemas
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
+		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+		
 		// load a WXS schema, represented by a Schema instance
 		Source schemaFile = new StreamSource(schema);
 		Schema schema = factory.newSchema(schemaFile);
@@ -41,6 +44,8 @@ public class XmlValidator {
 		// create a Validator instance, which can be used to validate an instance
 		// document
 		Validator validator = schema.newValidator();
+		validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
 		// validate the DOM tree
 		try {
