@@ -13,6 +13,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class XmlValidator {
@@ -28,9 +29,8 @@ public class XmlValidator {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();	
 		documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-		
-		DocumentBuilder parser = documentBuilderFactory.newDocumentBuilder();
-		Document document = parser.parse(xmlFile);
+		DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
+		Document document = builder.parse(new InputSource(xmlFile.getAbsolutePath()));
 
 		// create a SchemaFactory capable of understanding WXS schemas
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
