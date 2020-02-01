@@ -16,7 +16,7 @@
     * https://docs.oracle.com/javase/tutorial/jaxp/properties/backgnd.html
 
 * My use case:
-    * run multiple validations agains the same schema over and over
+    * run multiple validations against the same schema over and over
     * It would be okay to keep the schema in memory, it is pretty large
     * requires input (a) from file and (b) from string
     * Instead of exceptions as result types, something more suitable shall be there as all processing shall happen within streams and completable futures
