@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/mySchema/" targetNamespace="http://www.example.org/mySchema/">
-
-    <complexType name="INSTANCE">
-    	<sequence>
-    		<element name="NAME" type="string"></element>
-    	</sequence>
-    </complexType>
-
-    <element name="INSTANCE" type="tns:INSTANCE"></element>
-    
-</schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:complexType name="INSTANCE">
+		<xs:sequence>
+			<xs:element name="NAME" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="INSTANCE" type="INSTANCE"/>
+	
+</xs:schema>

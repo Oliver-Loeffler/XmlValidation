@@ -35,19 +35,11 @@ public class XmlValidator {
 		Schema schema = createSchema();
 
 		Validator validator = createValidator(schema);
-
-		// validate the DOM tree
-		try {
-			validator.validate(domSource);
-		} catch (SAXException e) {
-			// instance document is invalid!
-		}
+		validator.validate(domSource);
 
 	}
 
 	private Validator createValidator(Schema schema) throws SAXNotRecognizedException, SAXNotSupportedException {
-		// create a Validator instance, which can be used to validate an instance
-		// document
 		Validator validator = schema.newValidator();
 		validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
@@ -55,15 +47,11 @@ public class XmlValidator {
 	}
 
 	private Schema createSchema() throws SAXNotRecognizedException, SAXNotSupportedException, SAXException {
-		// create a SchemaFactory capable of understanding WXS schemas
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-		
-		// load a WXS schema, represented by a Schema instance
 		Source schemaSource = new StreamSource(this.schemaFile);
-		Schema schema = factory.newSchema(schemaSource);
-		return schema;
+		return factory.newSchema(schemaSource);
 	}
 
 	private DOMSource createDOMSource(File xmlFile) throws ParserConfigurationException, SAXException, IOException {
