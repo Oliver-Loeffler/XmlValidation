@@ -17,8 +17,6 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
 public class XmlValidator {
 
@@ -28,25 +26,23 @@ public class XmlValidator {
 		this.schemaFile = xsdFile;
 	}
 
-	public void validate(File xmlFile) throws Exception {
+	public void validate(File xmlFile) throws ParserConfigurationException, SAXException, IOException {
 
 		DOMSource domSource = createDOMSource(xmlFile);
-
 		Schema schema = createSchema();
-
 		Validator validator = createValidator(schema);
 		validator.validate(domSource);
-
+		
 	}
-
-	private Validator createValidator(Schema schema) throws SAXNotRecognizedException, SAXNotSupportedException {
+	
+	private Validator createValidator(Schema schema) throws SAXException {
 		Validator validator = schema.newValidator();
 		validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 		return validator;
 	}
 
-	private Schema createSchema() throws SAXNotRecognizedException, SAXNotSupportedException, SAXException {
+	private Schema createSchema() throws SAXException {
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
