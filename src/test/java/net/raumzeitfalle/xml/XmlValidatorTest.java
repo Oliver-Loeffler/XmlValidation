@@ -9,12 +9,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 class XmlValidatorTest {
-
+	
+	@BeforeAll
+	public static void prepare() {
+		Locale.setDefault(Locale.ENGLISH);
+	}
+	
 	@Test
 	void positiveValidation_noFileIO() throws Exception {
 		
